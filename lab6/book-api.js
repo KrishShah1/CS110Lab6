@@ -29,7 +29,7 @@ app.post('/book/:isbn', (req, res) => {
         let book = books[i];
 
         if (book.isbn === isbn) {
-            books[i] = newBook;
+            books[i] = {...newBook, isbn};
         }
     }
 
@@ -38,6 +38,18 @@ app.post('/book/:isbn', (req, res) => {
 
 app.get('/books', (req, res) => {
     res.json(books);
+});
+
+app.get('/book/:isbn', (req, res) => {
+    const isbn = req.params.isbn;
+
+    for (let i = 0; i < books.length; i++) {
+        let book = books[i];
+
+        if (book.isbn === isbn) {
+            res.json(book);
+        }
+    }
 });
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));

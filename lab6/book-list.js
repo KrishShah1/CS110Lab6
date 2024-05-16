@@ -20,13 +20,13 @@ async function loadBooks() {
 
                             <div>Author: ${book.author}</div>
                             <div>Publisher: ${book.publisher}</div>
-                            <div>Number of Pages: ${book.numOfPages}</div>
+                            <div>Number of Pages: ${book.pages}</div>
 
                             <hr>
 
                             <button type="button" class="btn btn-danger">Delete</button>
                             <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#editBookModal" onClick="setEditModal(${book.isbn})"> 
+                                data-target="#editBookModal" onClick="setEditModal('${book.isbn}')">
                                 Edit
                             </button>
                         </div>
@@ -48,25 +48,26 @@ async function setEditModal(isbn) {
     console.log(response.statusText);
 
     if (response.status == 200) {
-        
-        let data = await response.text();
+
+        let data = await response.json();
         console.log(data);
+
         const book = JSON.parse(data);
 
         const {
             title,
             author,
             publisher, 
-            publish_date,
-            numOfPages
+            datepublished,
+            pages
         } = book;
 
         document.getElementById('isbn').value = isbn;
         document.getElementById('title').value = title;
         document.getElementById('author').value = author; 
         document.getElementById('publisher').value = publisher;
-        document.getElementById('publish_date').value = publish_date; 
-        document.getElementById('numOfPages').value = numOfPages;
+        document.getElementById('datepublished').value = datepublished; 
+        document.getElementById('pages').value = numOfPages;
 
         document.getElementById('editForm').action = 'http://localhost:3000/book/${isbn}';
     }
