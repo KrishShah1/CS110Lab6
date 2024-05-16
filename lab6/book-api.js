@@ -24,17 +24,23 @@ app.post('/book', (req, res) => {
 app.post('/book/:isbn', (req, res) => {
     const isbn = req.params.isbn;
     const newBook = req.body;
+    let bookFound = false;
 
     for (let i = 0; i < books.length; i++) {
-        let book = books[i];
-
-        if (book.isbn === isbn) {
-            books[i] = {...newBook, isbn};
+        if (books[i].isbn === isbn) {
+            books[i] = { ...newBook, isbn };
+            bookFound = true;
+            break;
         }
     }
 
-    res.send('Book is edited');
+    if (bookFound) {
+        res.send('Book is edited');
+    } else {
+        res.status(404).send('Book not found');
+    }
 });
+
 
 app.get('/books', (req, res) => {
     res.json(books);
