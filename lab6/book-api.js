@@ -24,38 +24,22 @@ app.post('/book', (req, res) => {
 app.post('/book/:isbn', (req, res) => {
     const isbn = req.params.isbn;
     const newBook = req.body;
-    let bookFound = false;
 
     for (let i = 0; i < books.length; i++) {
-        if (books[i].isbn === isbn) {
-            books[i] = { ...newBook, isbn };
-            bookFound = true;
-            break;
+        let book = books[i]
+
+        if (book.isbn === isbn) {
+            books[i] = newBook;
         }
     }
 
-    if (bookFound) {
-        res.send('Book is edited');
-    } else {
-        res.status(404).send('Book not found');
-    }
+    res.send('Book is edited');
+
 });
 
 
 app.get('/books', (req, res) => {
     res.json(books);
-});
-
-app.get('/book/:isbn', (req, res) => {
-    const isbn = req.params.isbn;
-
-    for (let i = 0; i < books.length; i++) {
-        let book = books[i];
-
-        if (book.isbn === isbn) {
-            res.json(book);
-        }
-    }
 });
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
