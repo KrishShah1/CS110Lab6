@@ -1,45 +1,79 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>New Book</title>
-    </head>
-    <body>
-        <hr>
-        <h1>Create New Book</h1>
-        <hr>
 
-        <form action="http://localhost:3000/book" method="POST">
-            <div class="form-group">
-                <label for="isbn">ISBN</label>
-                <input class="form-control" name="isbn">
-            </div>
+<head>
+    <title>New Book</title>
+    <style>
+        form {
+            margin: 0 auto;
+            width: 50%;
+        }
 
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input class="form-control" name="title">
-            </div>
+        label {
+            font-weight: bold;
+        }
 
-            <div class="form-group">
-                <label for="author">Author</label>
-                <input class="form-control" name="author">
-            </div>
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-            <div class="form-group">
-                <label for="publish_date">Published Date</label>
-                <input class="form-control" name="datepublished">
-            </div>
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-            <div class="form-group">
-                <label for="publisher">Publisher</label>
-                <input class="form-control" name="publisher">
-            </div>
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
 
-            <div class="form-group">
-                <label for="numOfPages">Number of Pages</label>
-                <input class="form-control" name="numOfPages">
-            </div>
+<body>
+    <hr>
+    <h1>Create New Book</h1>
+    <hr>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </body>
+    <form action="http://localhost:3000/book" method="POST">
+        <div class="form-group">
+            <label for="isbn">ISBN</label>
+            <input class="form-control" name="isbn">
+        </div>
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input class="form-control" name="title">
+        </div>
+
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input class="form-control" name="author">
+        </div>
+
+        <div class="form-group">
+            <label for="publish_date">Published Date</label>
+            <input class="form-control" name="publish_date">
+        </div>
+
+        <div class="form-group">
+            <label for="publisher">Publisher</label>
+            <input class="form-control" name="publisher">
+        </div>
+
+        <div class="form-group">
+            <label for="numOfPages">Number of Pages</label>
+            <input class="form-control" name="numOfPages">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</body>
+
 </html>

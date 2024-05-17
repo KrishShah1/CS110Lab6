@@ -24,7 +24,10 @@ async function loadBooks() {
 
                             <hr>
 
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-danger" 
+                                onClick="deleteBook('${book.isbn}')">
+                                Delete
+                            </button>
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#editBookModal" onClick="setEditModal('${book.isbn}')">
                                 Edit
@@ -33,7 +36,7 @@ async function loadBooks() {
                     </div>
                 </div>
            `
-            document.getElementById('books').innerHTML = document.getElementById('books').innerHTML + x;
+            document.getElementById('books').innerHTML += x;
         }
     }
 }
@@ -44,13 +47,9 @@ async function setEditModal(isbn) {
     
     let response = await fetch(`http://localhost:3000/book/${isbn}`);
 
-    console.log(response.status); 
-    console.log(response.statusText);
-
     if (response.status == 200) {
 
         let data = await response.text();
-        console.log(data);
 
         const book = JSON.parse(data);
 
@@ -69,6 +68,21 @@ async function setEditModal(isbn) {
         document.getElementById('publisher').value = publisher;
         document.getElementById('numOfPages').value = numOfPages;
 
-        document.getElementById('editForm').action = 'http://localhost:3000/book/${isbn}';
+        document.getElementById('editForm').action = `http://localhost:3000/book/${isbn}`;
+
+    }
+}
+
+async function deleteBook(isbn) {
+    let response = await fetch(`http://localhost:3000/book/${isbn}`, {
+        method: 'DELETE'
+    });
+
+    if (response.status === 200) {
+        alert('Book deleted successfully');
+        document.getElementById('books').innerHTML = '';
+        loadBooks();
+    } else {
+        alert('Error deleting book');
     }
 }
